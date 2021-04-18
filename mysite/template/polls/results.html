@@ -1,0 +1,15 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{%block main_content%}
+<h2 style="text-align: center;">THANK YOU FOR VOTING!</h2>
+<h5>{{question.question_text}}</h5>
+
+<ul>
+    {% for ch in question.choice_set.all %}
+        <li> {{ch.choice_text}} -- {{ch.no_votes}} vote{{ch.vote|pluralize}}</li>
+    {%endfor%}
+</ul>
+
+<a href={% url 'polls:details' question.id %} style="color: black;"> Vote Again </a><br>
+<a href="{% url 'polls:index' %}" style="color: black;"><-- Go back to Main Menu</a>
+{%endblock%}

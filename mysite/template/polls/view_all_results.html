@@ -1,0 +1,25 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+{% block main_content %}
+{% if all_ques %} 
+    <ul>
+        {% for q in all_ques %}
+        <li>
+            <p>{{ q.question_text }}</p>
+            <ul>
+                {%for ch in q.choice_set.all%}
+                <li>
+                    {{ch.choice_text}} -- {{ch.no_votes}} votes
+                </li>
+                {%endfor%}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> 
+        No polls are available
+    </p>
+{% endif %}
+<a href="{% url 'polls:index' %}" style="color: black;" ><-- Go back to Main Menu</a>
+{%endblock%}    

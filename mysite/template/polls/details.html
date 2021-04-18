@@ -1,0 +1,20 @@
+
+{% extends 'polls/base.html' %}
+{% load static %}
+{% block main_content %}
+<h5> {{question.question_text}} </h5>
+
+<form action = "/polls/{{question.id}}/votes" method = "post">
+    {% csrf_token %}
+    {% for ch in question.choice_set.all %}
+        <input type='radio' name='choice' id="choice {{forloop.counter}}" value = "{{ch.id}}"/>
+        <label for="choice {{forloop.counter}}">{{ch.choice_text}}</label><br>
+    {% endfor %}
+    <br>
+    <input type= 'submit' value ="vote"/>
+</form>
+
+<a href="{% url 'polls:index' %}" style="color: black;"><-- Go back to Main Menu</a>
+
+{% endblock %}
+    
